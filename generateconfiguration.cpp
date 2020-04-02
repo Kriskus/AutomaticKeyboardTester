@@ -31,6 +31,7 @@ void GenerateConfiguration::createButtonConfiguration() {
     prepareColumntPin();
     prepareRowPin();
     readButtonTable();
+    saveGeneratedConfiguration();
 }
 
 void GenerateConfiguration::readButtonTable() {
@@ -93,7 +94,7 @@ void GenerateConfiguration::prepareRowPin() {
 }
 
 void GenerateConfiguration::saveGeneratedConfiguration() {
-    QString filePath = QFileDialog::getSaveFileName(this, "Wybierz plik", QString(), "*.cfg");
+    QString filePath = QFileDialog::getSaveFileName(this, "Wybierz plik", "C:/scnr/", "*.cfg");
 
     QThread *saveConfigurationThread;
     FileOperationSave *saveFile;

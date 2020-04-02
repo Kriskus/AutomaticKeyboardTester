@@ -5,8 +5,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     connect(ui->pushButtonTester, SIGNAL(clicked(bool)), this, SLOT(runTester()));
-    connect(ui->pushButtonGenerator, SIGNAL(clicked(bool)), this, SLOT(runGenerator()));
+    connect(ui->pushButtonGenerator, SIGNAL(clicked(bool)), this, SLOT(runGeneratorScenario()));
     connect(ui->pushButtonAddConfiguration, SIGNAL(clicked(bool)), this, SLOT(copyConfigurationFile()));
+    connect(ui->pushButtonCreateConfiguration, SIGNAL(clicked(bool)), this, SLOT(runGeneratorConfiguration()));
 
     readAvailableConfigurationFiles();
 }
@@ -58,6 +59,7 @@ void MainWindow::runGeneratorConfiguration() {
     configuration = new GenerateConfiguration();
     connect(configuration, SIGNAL(finished()), this, SLOT(show()));
     connect(configuration, SIGNAL(finished()), configuration, SLOT(deleteLater()));
+    connect(configuration, SIGNAL(finished()), this, SLOT(readAvailableConfigurationFiles()));
     this->hide();
     configuration->show();
 }
